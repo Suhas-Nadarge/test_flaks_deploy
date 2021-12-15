@@ -8,6 +8,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SendEmailComponent } from './components/send-email/send-email.component';
+import { LoginService } from './services/login.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,11 @@ import { SendEmailComponent } from './components/send-email/send-email.component
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
+    AngularEditorModule ,
     ReactiveFormsModule,
+    HttpClientModule 
   ],
-  providers: [],
+  providers: [LoginService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
