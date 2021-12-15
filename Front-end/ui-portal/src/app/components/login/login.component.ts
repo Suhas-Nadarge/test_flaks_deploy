@@ -1,3 +1,4 @@
+import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -9,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup
-  constructor(private fb:FormBuilder,public router:Router) { }
+  constructor(private fb:FormBuilder,public router:Router, public loginService: LoginService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -25,6 +26,10 @@ export class LoginComponent implements OnInit {
 
 
   Validate(username:string,password:string){
+    this.loginService.loginUser({email:'Demo Email',password:'demopass'}).subscribe((data:any) => {
+      console.log(data);
+    });
+
 this.router.navigate(['/home'])
 }
 

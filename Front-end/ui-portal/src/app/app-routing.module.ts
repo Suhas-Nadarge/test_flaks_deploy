@@ -1,3 +1,4 @@
+import { SendEmailComponent } from './components/send-email/send-email.component';
 import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
@@ -8,7 +9,9 @@ const routes: Routes = [
   {path: '' , redirectTo: 'home', pathMatch: 'full'},
  {path: 'home', component: HomeComponent },
  {path: 'login', component: LoginComponent },
- {path: 'registeruser', component: RegisterComponent }
+ {path: 'registeruser', component: RegisterComponent },
+ {path: 'send-email', component: SendEmailComponent },
+
 ]
 
 @NgModule({
