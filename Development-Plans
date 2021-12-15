@@ -1,0 +1,11 @@
+Register user with valid gmail
+Login same
+Create send mail service(it should be asynchronus strictly in case we have 1000 contacts, it should not go one by one)
+Create POST request to store history of sent mail along with the user.
+Save Contact list-Need to confirm
+Clear history
+Clear added contacts
+
+SMS Features- Will see if feasible
+Whatspp broadcast-Peding.
+
