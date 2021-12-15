@@ -1,4 +1,4 @@
-from flaskapp import app ,db ,bcrypt , api
+from flaskapp import app ,db ,bcrypt , api,send_mail
 from flask import request
 from  flaskapp.models import User
 from flask_login import login_user , current_user , logout_user , login_required
@@ -8,6 +8,7 @@ from flask_restful import Resource
 
 @app.route("/")
 def index():
+    # send_mail.send_email()
     return jsonify({'text':'Home Page'}) 
 
 
