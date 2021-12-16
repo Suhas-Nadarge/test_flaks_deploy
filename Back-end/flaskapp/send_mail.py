@@ -1,19 +1,31 @@
-from flask_mail import Message
-from flaskapp import mail
-
+from flask_mail import Message, smtplib
+from flaskapp import mail, db
+from flaskapp.models import User_history
+from flask_login import current_user
+import os
 
 #https://pythonhosted.org/Flask-Mail/
-def send_email():
+def send_email(subject,content,recipients):
 
-    users = ['shubham.patne1625@gmail.com','nadargesuhas@gmail.com']
 
     with mail.connect() as conn:
-        for user in users:
-            message = f"Hello , Sending Mail to {user} ... Through Flask API"
-            subject = f"hello, {user}   .... Testing Subject"
+        for user in recipients:
+
+            html_message = content
+            subject = content
             msg = Message(recipients=[user],
-                        body=message,
+                        html=html_message,
                         subject=subject)
 
-            
-            conn.send(msg)
+            sender = os.environ.get('EMAIL_ID')
+            user_history = User_history(sender_email_id=sender,recipient_email_id=user,subject=subject,content=content)
+
+            try:
+                conn.send(msg)
+                user_history.status = 'Success'
+
+            except smtplib.SMTPRecipientsRefused as e:
+                pass
+            finally:
+                db.session.add(user_history)
+                db.session.commit()

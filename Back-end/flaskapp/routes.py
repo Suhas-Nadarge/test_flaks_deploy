@@ -80,3 +80,20 @@ def logout():
     logout_user()
     return  jsonify({'status':'success','massage':'logged out'})
 
+
+@app.route("/send_email",methods=['GET','POST'])
+@login_required
+def send_email():
+    
+    data = request.get_json()
+
+    subject = data['subject']
+    email_body = data['email_body']
+    recipients = data['recipients']
+
+
+    send_mail.send_email(subject,email_body,recipients)
+
+    massage = f"Send Email opreation done "
+
+    return jsonify({'status': 'success', 'message': massage})
