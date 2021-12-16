@@ -18,34 +18,25 @@ def register():
 
     data = request.get_json()
 
-    print(data)
     if request.method == 'POST':
 
         if current_user.is_authenticated:
-            return jsonify({'status':'fail','massage':'user is already logged in'})
+            return jsonify({'status':'fail','massage':'user is already logged in'}) , 404
 
-        # if "username" not in data['username'] or email not in data['email'] :
-        #     return jsonify({'status':'fail','massage':'user name and email is requried'})
 
         username = data['username']
         email = data['email']
         password = data['password']
-        confirm_password = data['confirm_password']
-
-
-        if password != confirm_password:
-            return jsonify({'status':'fail','massage':'password doesn\'t match'})
-
         
         user = User.query.filter_by(username=username).first()
 
         if user:
-            return jsonify({'status': 'fail', 'message': 'User already registered.'})
+            return jsonify({'status': 'fail', 'message': 'User already registered.'}), 500
         
         user = User.query.filter_by(email=email).first()
 
         if user:
-            return jsonify({'status': 'fail', 'message': 'User already registered.'})
+            return jsonify({'status': 'fail', 'message': 'User already registered.'}) ,500
 
 
         hashed_passwd = bcrypt.generate_password_hash(password).decode('utf-8')
@@ -54,38 +45,37 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        massage = f"User {username} successfully added "
+        massage = f"User {username} successfully added " , 200
 
         return jsonify({'status': 'success', 'message': massage})
 
-    return jsonify({'data':'something'})
+    return jsonify({'data':'something'}) , 500
 
 
-@app.route("/login",methods=['GET','POST'])
+@app.route("/login",methods=['POST'])
 def login():
     
 
     data = request.get_json()
 
     if current_user.is_authenticated:
-            return jsonify({'status':'fail','massage':'user is already logged in'})
+            return jsonify({'status':'fail','massage':'user is already logged in'}) ,500
     
     email = data['email']
     password = data['password']
-    remember = data['remember']
 
-    user = User.query.filter_by(email=form.email.data).first()
+    user = User.query.filter_by(email=data['email']).first()
     
     if user and bcrypt.check_password_hash(user.password,password):
-        login_user(user,remember=remember)
+        login_user(user)
         massage = f"User {username} logged in "
-        return jsonify({'status':'success','massage':massage})
+        return jsonify({'status':'success','massage':massage}) ,200
     else:
-        return jsonify({'status':'fail','massage':'something went wrong'})
+        return jsonify({'status':'fail','massage':'something went wrong'}), 401
 
     return jsonify({'data':'something'})
 
-@app.route("/logout",methods=['GET','POST'])
+@app.route("/logout",methods=['POST'])
 def logout():
     logout_user()
     return  jsonify({'status':'success','massage':'logged out'})
