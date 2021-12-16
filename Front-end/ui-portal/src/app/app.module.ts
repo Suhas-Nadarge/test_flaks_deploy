@@ -12,6 +12,7 @@ import { SendEmailComponent } from './components/send-email/send-email.component
 import { LoginService } from './services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    SendEmailComponent
+    SendEmailComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
