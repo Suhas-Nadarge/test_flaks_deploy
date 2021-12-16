@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EditorConfig } from 'src/app/constant';
 
 @Component({
   selector: 'app-send-email',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SendEmailComponent implements OnInit {
 
+  editorConfig = EditorConfig
   constructor() { }
 
   ngOnInit(): void {
