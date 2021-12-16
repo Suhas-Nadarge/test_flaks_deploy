@@ -1,3 +1,4 @@
+import { SendEmailService } from './services/send-email.service';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -28,7 +29,7 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
     ReactiveFormsModule,
     HttpClientModule 
   ],
-  providers: [LoginService],
+  providers: [LoginService,SendEmailService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
