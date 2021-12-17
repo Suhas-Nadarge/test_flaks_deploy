@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup
+  showLoginError = false;
   constructor(private fb:FormBuilder,public router:Router, public loginService: LoginService) { }
 
   ngOnInit(): void {
@@ -18,19 +19,31 @@ export class LoginComponent implements OnInit {
 
   createForm() {
     this.loginForm = this.fb.group({
-      username:['',Validators.required],
+      email:['',Validators.required],
       password:['',Validators.required]
     })
     
   }
 
 
-  Validate(username:string,password:string){
-    this.loginService.loginUser({email:'Demo Email',password:'demopass'}).subscribe((data:any) => {
+  Validate(email:string,password:string){
+    this.showLoginError = false;
+    let requestObj = {email:email,password:password}
+
+    this.loginService.loginUser(requestObj).subscribe((data:any) => {
+      if(data['status'] === 'success'){
+        this.router.navigate(['/home'])
+      } else {
+        this.showLoginError = true;
+        this.router.navigate(['/home'])
+      }
       console.log(data);
+    },
+    (err: any)=>{
+    console.log(err['error']['message'])
+    this.router.navigate(['/home'])
     });
 
-this.router.navigate(['/home'])
 }
 
 
