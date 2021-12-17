@@ -2,6 +2,7 @@ import { LoginService } from './../../services/login.service';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrManager } from 'ng6-toastr-notifications';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup
   showLoginError = false;
-  constructor(private fb:FormBuilder,public router:Router, public loginService: LoginService) { }
-
+  constructor(private fb:FormBuilder,public router:Router, public loginService: LoginService,public toastr:ToastrManager) { }
+  isLogin= true;
   ngOnInit(): void {
     this.createForm();
   }
@@ -20,19 +21,22 @@ export class LoginComponent implements OnInit {
   createForm() {
     this.loginForm = this.fb.group({
       email:['',Validators.required],
-      password:['',Validators.required]
+      username:['',Validators.required],
+      password:['',Validators.required],
+      confirm_password:['',Validators.required]
     })
     
   }
 
 
-  Validate(email:string,password:string){
+  login(username:string,password:string){
     this.showLoginError = false;
-    let requestObj = {email:email,password:password}
+    let requestObj = {email:username,password:password}
 
     this.loginService.loginUser(requestObj).subscribe((data:any) => {
       if(data['status'] === 'success'){
         this.router.navigate(['/home'])
+      this.toastr.successToastr('Logged in successfully!', 'Success',{toastTimeout:6000});
       } else {
         this.showLoginError = true;
         this.router.navigate(['/home'])
@@ -40,20 +44,41 @@ export class LoginComponent implements OnInit {
       console.log(data);
     },
     (err: any)=>{
-    console.log(err['error']['message'])
+      this.toastr.errorToastr(err['error']['message'] ? err['error']['message'] : 'Something went wrong!', 'Error',{toastTimeout:6000});
     this.router.navigate(['/home'])
     });
 
 }
 
 
-showWarning(err: any) {
-  // this.toastr.warningToastr(err, 'Alert!',{toastTimeout:6000});
+registerUser(): any{
+  {
+    this.showLoginError = false;
+    let requestObj = {
+      username:'',
+      email:'username',
+      password:'password'
+    }
+
+    this.loginService.registerUser(requestObj).subscribe((data:any) => {
+      if(data['status'] === 'success'){
+      this.toastr.successToastr('User Registered successfully, check your mail for the confirmation!', 'Success',{toastTimeout:6000});
+      this.loginForm.reset();
+      this.router.navigate(['/login'])
+      
+    } else {
+        this.showLoginError = true;
+      }
+      console.log(data);
+    },
+    (err: any)=>{
+      this.toastr.errorToastr(err['error']['message'] ? err['error']['message'] : 'Something went wrong!', 'Error',{toastTimeout:6000});
+    console.log(err['error']['message'])
+    });
+
 }
 
 
-showError(err: any) {
-// this.toastr.errorToastr(err, 'Oops!',{toastTimeout:6000});
 }
 
 }

@@ -13,7 +13,7 @@
             <div class="form-group">
                 <label class="form-label">Enter list of emails below</label>
                 Please enter list of emails seperated by comma <code>(For example: abcd@gmail.com,xyz@gmail.com)</code>
-                <textarea formControlName="recipients" class="form-control" id="exampleFormControlTextarea3" rows="13" aria-describedby="emailHelp"></textarea>
+                <textarea formControlName="recipients"  class="form-control" id="exampleFormControlTextarea3" rows="13" aria-describedby="emailHelp"></textarea>
               </div>
             <button type="button"(click)="sendEmail()" class="btn btn-dark btn-lg">Send</button>
           
@@ -21,10 +21,12 @@
     <div class="col-sm-6">
         <!-- <div class="row"></div> -->
         <label for="exampleInputEmail1" class="form-label">Write Email</label>
-        <angular-editor formControlName="email_body" [config]="editorConfig"></angular-editor>
+        <angular-editor formControlName="email_body" readonly [config]="editorConfig"></angular-editor>
         <div class="row"></div>
     </div>
     </div>
 </div>
 </div>
+
+
 
