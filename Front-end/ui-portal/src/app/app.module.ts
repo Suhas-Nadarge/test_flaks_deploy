@@ -13,6 +13,10 @@ import { LoginService } from './services/login.service';
 import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HeaderComponent } from './components/header/header.component';
+import { ToastrModule } from 'ng6-toastr-notifications';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';import {trigger,state,style,animate,transition}from '@angular/animations';
+import { ViewHistoryComponent } from './components/view-history/view-history.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +25,8 @@ import { HeaderComponent } from './components/header/header.component';
     RegisterComponent,
     HomeComponent,
     SendEmailComponent,
-    HeaderComponent
+    HeaderComponent,
+    ViewHistoryComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,9 @@ import { HeaderComponent } from './components/header/header.component';
     BrowserModule,
     AngularEditorModule ,
     ReactiveFormsModule,
-    HttpClientModule 
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [LoginService,SendEmailService],
   bootstrap: [AppComponent]
