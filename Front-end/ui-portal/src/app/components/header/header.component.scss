@@ -1,0 +1,27 @@
+.navbar-nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding-left: 51px;
+    margin-bottom: 6px;
+    list-style: none;
+
+}
+
+@media (min-width: 576px){
+.navbar-expand-sm .navbar-nav .nav-link {
+    padding-right: 0.5rem;
+    padding-left: 9.5rem;
+}
+}
+
+.navbar-dark .navbar-brand {
+    color: #fff;
+    font-size: 34px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    color: rgba(255,255,255,.5);
+    font-size: 21px;
+}
