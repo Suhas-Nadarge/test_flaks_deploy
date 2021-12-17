@@ -1,3 +1,74 @@
+//https://dev.to/shantanu_jana/automatic-image-slideshow-in-html-css-26jl
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto slideshow</title>
+    <!--Stylesheet-->
+    <style media="screen">
+      *{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+      }
+  body{
+    background-color: #7aacff;
+    }
+  .container{
+    width: 500px;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    overflow: hidden;
+    border: 10px solid #ffffff;
+    border-radius: 8px;
+    box-shadow: 10px 25px 30px rgba(0,0,0,0.3);
+    }
+  .wrapper{
+    width: 100%;
+    display: flex;
+    animation: slide 16s infinite;
+    }
+  @keyframes slide{
+    0%{
+        transform: translateX(0);
+    }
+    25%{
+        transform: translateX(0);
+    }
+    30%{
+        transform: translateX(-100%);
+    }
+    50%{
+        transform: translateX(-100%);
+    }
+    55%{
+        transform: translateX(-200%);
+    }
+    75%{
+        transform: translateX(-200%);
+    }
+    80%{
+        transform: translateX(-300%);
+    }
+    100%{
+        transform: translateX(-300%);
+    }
+  }
+  img{
+    width: 100%;
+  }
+    </style>
+</head>
 <body>
-  Home is here
+    <div class="container">
+        <div class="wrapper">
+            <img src="https://whatismyipaddress.com/wp-content/uploads/email-server-image-1024x598.jpg">
+            <img src="https://cdn.mos.cms.futurecdn.net/MCTaifsDFHvU7pJ9uKmjzY.jpg">
+            <img src="https://christinaconsolino.com/wp-content/uploads/2021/07/mail-2048128_1920.png">
+            <img src="https://terramanagers.com/wp-content/uploads/2018/02/email_icon.png">
+        </div>
+    </div>
 </body>
+</html>
