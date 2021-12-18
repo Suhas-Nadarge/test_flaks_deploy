@@ -4,7 +4,7 @@ from flaskapp.models import User_history
 from flask_login import current_user
 import os
 
-#https://pythonhosted.org/Flask-Mail/
+# refrence : https://pythonhosted.org/Flask-Mail/
 def send_email(subject,content,recipients):
 
 
@@ -12,12 +12,13 @@ def send_email(subject,content,recipients):
         for user in recipients:
 
             html_message = content
-            subject = content
+            subject = subject
             msg = Message(recipients=[user],
                         html=html_message,
                         subject=subject)
 
             sender = os.environ.get('EMAIL_ID')
+            # sender = current_user.email
             user_history = User_history(sender_email_id=sender,recipient_email_id=user,subject=subject,content=content)
 
             try:
