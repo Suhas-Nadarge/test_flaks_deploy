@@ -23,7 +23,7 @@ class User(db.Model,UserMixin):
 
 class User_history(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key=True)
-    sender_email_id = db.Column(db.String(120),nullable=False)
+    username = db.Column(db.String(120),nullable=False)
     recipient_email_id = db.Column(db.String(120),nullable=False)
     subject = db.Column(db.String(200),nullable=False)
     content = db.Column(db.Text, nullable=False)
