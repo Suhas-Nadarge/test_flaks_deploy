@@ -14,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HeaderComponent } from './components/header/header.component';
 import { ToastrModule } from 'ng6-toastr-notifications';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';import {trigger,state,style,animate,transition}from '@angular/animations';
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';import {trigger,state,style,animate,transition}from '@angular/animations';
 import { ViewHistoryComponent } from './components/view-history/view-history.component';
 
 
@@ -36,7 +36,8 @@ import { ViewHistoryComponent } from './components/view-history/view-history.com
     ReactiveFormsModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NoopAnimationsModule
   ],
   providers: [LoginService,SendEmailService],
   bootstrap: [AppComponent]

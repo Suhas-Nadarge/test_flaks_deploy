@@ -15,7 +15,7 @@ export class SendEmailComponent implements OnInit {
   editorConfig = EditorConfig
   emailForm!: FormGroup;
   constructor(private fb:FormBuilder,public router:Router, public emailService: SendEmailService, public toastr:ToastrManager) { }
-
+  ihtml='<h3>Bold</h3>'
   ngOnInit(): void {
     this.createForm();
   }
