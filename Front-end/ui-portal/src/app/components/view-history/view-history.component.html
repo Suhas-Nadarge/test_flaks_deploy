@@ -16,24 +16,37 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="col-md-1">#</th>
-                <th class="col-md-3">UserName</th>
-                <th class="col-md-3">Subject</th>
-                <th class="col-md-3">Recipients</th>
-                <th class="col-md-3">View Email</th>
-                <th class="col-md-1">Action</th>
+                <th class="col-md-0"><b>#</b></th>
+                <th class="col-md-2"><b>UserName</b></th>
+                <th class="col-md-2"><b>Subject</b></th>
+                <th class="col-md-3"><b>Recipients</b></th>
+                <th class="col-md-1"><b>Status</b></th>
+                <th class="col-md-2"><b>Time</b></th>
+                <th class="col-md-2"><b>View Email</b></th>
+                <th class="col-md-1"><b>Action</b></th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of historyList;let i= index">
-                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }} </td>
-                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }}</td>
-                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }}</td>
-                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }}</td>
+                <td data-mdb-toggle="tooltip" [title]="item?.id">{{item?.id.length > 12 ? item?.id.substr(0,12)+ '...': item?.id }} </td>
+                <td data-mdb-toggle="tooltip" [title]="item?.username">{{item?.username.length > 24 ? item?.username.substr(0,24)+ '...': item?.username }}</td>
+                <td data-mdb-toggle="tooltip" [title]="item?.subject.length">{{item?.subject.length > 24 ? item?.subject.substr(0,24)+ '...': item?.subject }}</td>
+                <td data-mdb-toggle="tooltip" [title]="item?.recipient_email_id">{{item?.recipient_email_id.length > 36 ? item?.recipient_email_id.substr(0,36)+ '...': item?.recipient_email_id }}</td>
+                <td data-mdb-toggle="tooltip" [title]="item?.status">{{item?.status}}</td>
+                <td data-mdb-toggle="tooltip" [title]="item?.email_datetime">{{item?.email_datetime.length > 20 ? item?.email_datetime.substr(0,15)+ '...': item?.email_datetime }}</td>
+                <td ><button class="btn btn-dark btn-sm" data-target="#exampleModalCenter" (click)="showView(i)">Click Here</button></td>
+                <td><button class="btn btn-dark btn-sm"(click)="deleteRecord(item?.id,false)">Delete</button></td>
+                <!-- <td data-mdb-toggle="tooltip" [title]="item">{{item?.id}} </td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item?.username}}</td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item?.subject}}</td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item?.recipient_email_id}}</td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item?.status}}</td>
                 <td ><button class="btn btn-dark btn-sm" data-target="#exampleModalCenter" (click)="openPopup(i)">Click Here</button></td>
-                <td><button class="btn btn-dark btn-sm" >Delete</button></td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item?.email_datetime}}</td>
+                <td><button class="btn btn-dark btn-sm" >Delete</button></td> -->
+
             </tr>
-            
+            <button class="btn btn-dark btn-sm" (click)="deleteRecord(0,true)">Delete ALL</button>
         </tbody>
       
   <!-- https://www.geeksforgeeks.org/how-to-make-a-bootstrap-modal-popup-in-angular-9-8/ -->

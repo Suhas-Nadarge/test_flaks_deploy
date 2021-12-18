@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.loginUser(requestObj).subscribe((data:any) => {
       if(data['status'] === 'success'){
+        localStorage.setItem('username',requestObj.username)
         this.router.navigate(['/home'])
       this.toastr.successToastr('Logged in successfully!', 'Success',{toastTimeout:6000});
       } else {

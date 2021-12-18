@@ -7,7 +7,9 @@
     margin-left: 10px;
     margin-top: 80px;
 }
-
-// .table {
-//     border: ridge;
-// }
+.table td, .table th {
+    font: -webkit-control;
+}
+.table {
+    border: groove;
+}
