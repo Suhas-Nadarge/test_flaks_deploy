@@ -16,27 +16,53 @@
     <table class="table">
         <thead>
             <tr>
-                <th>#</th>
-                <th>UserName</th>
-                <th>Subject</th>
-                <th>Recipients</th>
-                <th>View Email</th>
-                <th>Action</th>
+                <th class="col-md-1">#</th>
+                <th class="col-md-3">UserName</th>
+                <th class="col-md-3">Subject</th>
+                <th class="col-md-3">Recipients</th>
+                <th class="col-md-3">View Email</th>
+                <th class="col-md-1">Action</th>
             </tr>
         </thead>
         <tbody>
             <tr *ngFor="let item of historyList;let i= index">
-                <td>{{i}}</td>
-                <td>{{item}}</td>
-                <td>{{item}}</td>
-                <td>{{item}}</td>
-                <td><button class="btn btn-dark btn-sm" >Click Here</button></td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }} </td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }}</td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }}</td>
+                <td data-mdb-toggle="tooltip" [title]="item">{{item.length > 12 ? item.substr(0,12)+ '...': item }}</td>
+                <td ><button class="btn btn-dark btn-sm" data-target="#exampleModalCenter" (click)="openPopup(i)">Click Here</button></td>
                 <td><button class="btn btn-dark btn-sm" >Delete</button></td>
             </tr>
             
         </tbody>
+      
+  <!-- https://www.geeksforgeeks.org/how-to-make-a-bootstrap-modal-popup-in-angular-9-8/ -->
+  <!-- Modal -->
+ 
     </table>
-
+    <div
+    class="modal"
+    tabindex="-1"
+    role="dialog"
+    [ngStyle]="{'display':displayStyle}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">View Email</h4>
+        </div>
+        <div class="modal-body" [innerHTML]="emailTemplate">
+          
+    
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" 
+                  (click)="closePopup()">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
    
 
 </div>

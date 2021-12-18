@@ -22,7 +22,11 @@
         <!-- <div class="row"></div> -->
         <label for="exampleInputEmail1" class="form-label">Write Email</label>
         <angular-editor formControlName="email_body" readonly [config]="editorConfig"></angular-editor>
-        <div class="row"></div>
+        
+        <!-- <div [innerHTML]="emailForm.get('email_body')?.value">
+            <h2></h2>
+           
+        </div> -->
     </div>
     </div>
 </div>
