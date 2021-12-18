@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
 
   login(username:string,password:string){
     this.showLoginError = false;
-    let requestObj = {email:username,password:password}
+    let requestObj = {username:username,password:password}
 
     this.loginService.loginUser(requestObj).subscribe((data:any) => {
       if(data['status'] === 'success'){
@@ -39,13 +39,13 @@ export class LoginComponent implements OnInit {
       this.toastr.successToastr('Logged in successfully!', 'Success',{toastTimeout:6000});
       } else {
         this.showLoginError = true;
-        this.router.navigate(['/home'])
+        // this.router.navigate(['/home'])
       }
       console.log(data);
     },
     (err: any)=>{
       this.toastr.errorToastr(err['error']['message'] ? err['error']['message'] : 'Something went wrong!', 'Error',{toastTimeout:6000});
-    this.router.navigate(['/home'])
+    // this.router.navigate(['/home'])
     });
 
 }
@@ -54,11 +54,7 @@ export class LoginComponent implements OnInit {
 registerUser(): any{
   {
     this.showLoginError = false;
-    let requestObj = {
-      username:'',
-      email:'username',
-      password:'password'
-    }
+    let requestObj = this.loginForm?.value;
 
     this.loginService.registerUser(requestObj).subscribe((data:any) => {
       if(data['status'] === 'success'){
