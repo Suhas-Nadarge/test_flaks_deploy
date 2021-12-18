@@ -91,18 +91,18 @@ def logout():
 
 
 @app.route("/send_email",methods=['GET','POST'])
-@login_required
+# @login_required
 def send_email():
     
     data = request.get_json()
 
-    
+    username = data['username']
     subject = data['subject']
     email_body = data['email_body']
     recipients = data['recipients'].split(',')
 
     # call function to send email
-    send_mail.send_email(subject,email_body,recipients)
+    send_mail.send_email(subject,email_body,recipients,username)
 
     massage = f"Send Email opreation done"
 
@@ -112,17 +112,20 @@ def send_email():
 
 
 
-@app.route("/get_history",methods=['GET'])
-@login_required
+@app.route("/get_history",methods=['GET','POST'])
+# @login_required
 def get_history():
 
-    user_history = User_history.query.all()
+    data = request.get_json()
+    username  = data['username']
+
+    user_history = User_history.query.filter_by(username=username).all()
 
     #list of json
     list_of_json = []
     for row in user_history:
         user_dict = { 'id' : row.id,
-                    'sender_email_id': row.sender_email_id,
+                    'username': row.username,
                     'recipient_email_id': row.recipient_email_id,
                     'subject': row.subject,
                     'content':row.content,
@@ -139,15 +142,12 @@ def get_history():
     
 
 @app.route("/delete_history",methods=['POST'])
-@login_required
+# @login_required
 def delete_history():
 
     data = request.get_json()
-    data = {'is_all':False,'id':1}
 
     is_all = data['is_all']
-
-    is_all =False
 
 
     if is_all: 
@@ -161,8 +161,7 @@ def delete_history():
     else:
 
         id_to_delete = data['id']
-        
-        id_to_delete = 1
+
 
         try:
             record_obj = User_history.query.filter_by(id=id_to_delete).first()
