@@ -5,11 +5,11 @@ from flask_login import current_user
 import os
 
 # refrence : https://pythonhosted.org/Flask-Mail/
-def send_email(subject,content,recipients):
+def send_email(subject,content,recipients,username):
 
 
     with mail.connect() as conn:
-        for user in recipients:
+        for user.strip() in recipients:
 
             html_message = content
             subject = subject
@@ -17,9 +17,8 @@ def send_email(subject,content,recipients):
                         html=html_message,
                         subject=subject)
 
-            sender = os.environ.get('EMAIL_ID')
-            # sender = current_user.email
-            user_history = User_history(sender_email_id=sender,recipient_email_id=user,subject=subject,content=content)
+
+            user_history = User_history(username=username,recipient_email_id=user,subject=subject,content=html_message)
 
             try:
                 conn.send(msg)
